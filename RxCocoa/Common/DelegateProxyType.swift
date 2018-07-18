@@ -325,8 +325,6 @@ extension DelegateProxyType where ParentObject: HasPrefetchDataSource, Self.Dele
                 , DelegateProxy.Delegate: AnyObject {
                 let proxy = DelegateProxy.proxy(for: object)
                 let unregisterDelegate = DelegateProxy.installForwardDelegate(dataSource, retainDelegate: retainDataSource, onProxyForObject: object)
-                // this is needed to flush any delayed old state (https://github.com/RxSwiftCommunity/RxDataSources/pull/75)
-                object.layoutIfNeeded()
 
                 let subscription = self.asObservable()
                     .observeOn(MainScheduler())
